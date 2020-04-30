@@ -1,0 +1,27 @@
+{
+  "name": "@swfsoft/swf-theme",
+  "version": "1.0.0",
+  "description": "Theming system for swf react.js projects",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/swiftforge/swf-theme.git"
+  },
+  "keywords": [],
+  "author": "Kiyota Sage <kiyota@swfsoft.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/swiftforge/swf-theme/issues"
+  },
+  "homepage": "https://github.com/swiftforge/swf-theme#readme",
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "styled-components": "^5.1.0",
+    "styled-reset": "^4.1.4",
+    "tinycolor2": "^1.4.1"
+  }
+}
