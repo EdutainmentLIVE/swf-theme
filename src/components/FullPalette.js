@@ -8,7 +8,7 @@ import Palette from './Palette'
 
 const FullPalette = () => {
 	return (
-		<>
+		<React.Fragment>
 			<Palette />
 			<Palette bg='black' />
 			<Palette color='secondary' />
@@ -21,7 +21,7 @@ const FullPalette = () => {
 			<Palette color='warn' bg='black' />
 			<Palette color='grey' />
 			<Palette color='grey' bg='black' />
-		</>
+		</React.Fragment>
 	)
 }
 export default FullPalette

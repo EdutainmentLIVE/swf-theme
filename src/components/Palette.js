@@ -61,7 +61,7 @@ const Col = ({
 			<h3>{`colors.${color}(${method})`}</h3>
 			<H1 color={color} methodName={method} />
 			<em>{defaultTxt}</em>
-			<>
+			<React.Fragment>
 				{samples
 					? samples.map(s => (
 							<H1 color={color} methodName={`${method}${s}`} key={s} />
@@ -77,7 +77,7 @@ const Col = ({
 									/>
 								) : null
 							)}
-			</>
+			</React.Fragment>
 		</div>
 	)
 }
