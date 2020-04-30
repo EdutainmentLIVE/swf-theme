@@ -2,7 +2,7 @@
 
 > Theming system for swf react.js projects
 
-[![NPM](https://img.shields.io/npm/v/swf-theme.svg)](https://www.npmjs.com/package/swf-theme) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/swf-theme.svg)](https://www.npmjs.com/package/@swfsoft/swf-theme) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Install
 
