@@ -90,8 +90,6 @@ const lightPrimaryColor = colors.primary({ lighten: 20 })
 // returns the color lightened by the darkenAmount in the colorSettings
 ```
 
-NOTE: All color processes are handled by [TinyColor](https://github.com/bgrins/TinyColor)
-
 ### Color Settings
 
 NOTE: These are passed in when creating the theme e.g.:
@@ -104,11 +102,11 @@ createTheme({
 })
 ```
 
-| Setting       | Description                                              | Default |
-| ------------- | -------------------------------------------------------- | ------- |
-| lightenAmount | number (1-100) to use during lighten preset calculations | 25      |
-| darkenAmount  | number (1-100) to use during darken preset calculations  | 20      |
-| tintOpacity   | default tint opacity (when using preset 'tint')          | 0.25    |
+| Setting       | Description                                                                                            | Default |
+| ------------- | ------------------------------------------------------------------------------------------------------ | ------- |
+| lightenAmount | base number (1-100) to use during lighten preset calculations. Note: this will be 'light' and 'light3' | 25      |
+| darkenAmount  | base number (1-100) to use during darken preset calculations. Note: this will be 'dark' and 'dark3'    | 20      |
+| tintOpacity   | default tint opacity (when using preset 'tint'). Note: this will be 'tint'                             | 0.25    |
 
 ### Color method options
 
@@ -136,6 +134,8 @@ NOTE: These should be entered as a string (e.g., `primary('light3')`)
 | tint | same as 'tint3' |
 | tint0-10 ('tint3') | adjusts alpha in increments of 10% (rgba(0,0,0,0.3) |
 | tint05 | special 5% alpha |
+
+NOTE: All color processes are handled by [TinyColor](https://github.com/bgrins/TinyColor)
 
 ## Breaks
 
