@@ -9,7 +9,7 @@ import defaultConfig from '../defaults'
 import { generateMediaQueries } from '../lib/media.helpers'
 import { generateGlobalStyles } from '../lib/globalStyles.helpers'
 import { generateColors } from '../lib/color.helpers'
-import { generateFonts } from '../lib/font.helpers'
+import { generateFonts, fluidFontSize as calcFluidFont } from '../lib/font.helpers'
 import { generateBreaks } from '../lib/breakpoint.helpers'
 
 const buildConfig = configuration => {
@@ -42,6 +42,7 @@ export let media
 export let colors
 export let fonts
 export let Globalstyles
+export const fluidFontSize = calcFluidFont
 
 export const createTheme = (configuration = {}, styleComponentsGlobalStylesFunc) => {
 	// Build exports using provided configuration
