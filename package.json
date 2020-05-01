@@ -1,6 +1,6 @@
 {
   "name": "@swfsoft/swf-theme",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "Theming system for swf react.js projects",
   "author": "swiftforge",
   "license": "ISC",
@@ -14,7 +14,7 @@
   "scripts": {
     "build": "microbundle-crl --no-compress --format modern,cjs",
     "start": "microbundle-crl watch --no-compress --format modern,cjs",
-    "prepublish": "run-s build",
+    "prepare": "run-s build",
     "test": "run-s test:unit test:lint test:build",
     "test:build": "run-s build",
     "test:lint": "eslint .",
@@ -51,6 +51,7 @@
     "dist"
   ],
   "dependencies": {
+    "lodash": "^4.17.15",
     "styled-components": "^5.1.0",
     "styled-reset": "^4.1.4",
     "tinycolor2": "^1.4.1"

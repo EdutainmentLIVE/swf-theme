@@ -6,7 +6,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import config, { colors } from '../theme'
+import { config, colors } from '../theme'
 
 const Block = styled.span`
 	display: inline-block;
@@ -64,19 +64,19 @@ const Col = ({
 			<React.Fragment>
 				{samples
 					? samples.map(s => (
-							<H1 color={color} methodName={`${method}${s}`} key={s} />
-					  ))
+						<H1 color={color} methodName={`${method}${s}`} key={s} />
+					))
 					: Array(max + 1)
-							.fill('')
-							.map((_, i) =>
-								i > 0 || includeZero ? (
-									<H1
-										color={color}
-										methodName={`${method}${i * multiplier}`}
-										key={`${method}${i * multiplier}`}
-									/>
-								) : null
-							)}
+						.fill('')
+						.map((_, i) =>
+							i > 0 || includeZero ? (
+								<H1
+									color={color}
+									methodName={`${method}${i * multiplier}`}
+									key={`${method}${i * multiplier}`}
+								/>
+							) : null
+						)}
 			</React.Fragment>
 		</div>
 	)
