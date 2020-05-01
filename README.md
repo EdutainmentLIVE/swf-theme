@@ -80,31 +80,31 @@ Example with preset string argument:
 
 ```jsx
 const lightPrimaryColor = colors.primary('light')
-// returns the color lightened by 30%
+// returns the color lightened by the lightenAmount in the colorSettings
 ```
 
 Example with options object:
 
 ```jsx
 const lightPrimaryColor = colors.primary({ lighten: 20 })
-// returns the color lightened by 20%
+// returns the color lightened by the darkenAmount in the colorSettings
 ```
 
 NOTE: All color processes are handled by [TinyColor](https://github.com/bgrins/TinyColor)
 
-### Color options
+### Color Settings
 
 NOTE: These are passed in when creating the theme e.g.:
 
 ```jsx
 createTheme({
-	colors: {
+	colorSettings: {
 		lightenAmount: 25,
 	},
 })
 ```
 
-| Option        | Description                                              | Default |
+| Setting       | Description                                              | Default |
 | ------------- | -------------------------------------------------------- | ------- |
 | lightenAmount | number (1-100) to use during lighten preset calculations | 25      |
 | darkenAmount  | number (1-100) to use during darken preset calculations  | 20      |
@@ -112,7 +112,7 @@ createTheme({
 
 ### Color method options
 
-NOTE: These are passed in the color method options object (e.g., `primary({lighten: 30})`)
+NOTE: These are passed in when calling the color method (e.g., `primary({lighten: 30})`)
 | Option | Description |
 |---------- |------------------------------------ |
 | lighten | lightens color by number (1-100) |
@@ -125,6 +125,7 @@ NOTE: These are passed in the color method options object (e.g., `primary({light
 
 ### Color method presets
 
+Handy preset built in color methods
 NOTE: These should be entered as a string (e.g., `primary('light3')`)
 | Preset | Description |
 |--------------------- |-------------------------------------------------------- |
