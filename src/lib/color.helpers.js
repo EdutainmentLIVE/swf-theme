@@ -21,7 +21,7 @@ const colorHandler = (colorName, config, opts) => {
 
 	if (colorName === 'grey') darkenAmount = darkenAmount * 1.5
 
-	// console.log('beginning with color: ', rawColor, ' and options: ', opts)
+	// console.log('firing color method for ', colorName, ' using color: ', rawColor, ' options: ', opts)
 
 	let Color = tinyColor(rawColor)
 
@@ -177,10 +177,22 @@ const generateColorHandlers = (colors, config) =>
 
 export const generateColors = config => {
 	const { colors, colorSettings, isDarkMode } = config
+
 	const newColors = generateColorHandlers(colors, config)
+
+	if (!colors.disabled) {
+		newColors.disabled = opts =>
+			colorHandler('disabled', {
+				colorSettings,
+				colors: {
+					disabled: isDarkMode ? newColors.grey('dark5') : newColors.grey('light5'),
+				},
+				opts,
+			})
+	}
+
 	return {
 		colorSettings: defaultsDeep(colorSettings),
-		disabled: isDarkMode ? newColors.grey('dark4') : newColors.grey('light4'),
 		...newColors,
 	}
 }

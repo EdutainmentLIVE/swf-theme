@@ -22,16 +22,28 @@ import {createTheme} from '@swfsoft/swf-theme'
 createTheme(<options>)
 ```
 
+NOTE: (this will accept custom defaults, to use your own defaults see "Typical Usage" below)
+
 ---
 
-## Usage
+## Typical Usage
 
-### Instantiate theme
+#### Create theme file
+
+This can live anywhere in your directory structure but typical convention would be to have it somewhere near or inside of your components directory:
+
+```
+components/theme.js
+```
+
+#### Instantiate theme
+
+In theme.js instantiate and export your theme:
 
 ```jsx
 import { createTheme } from '@swfsoft/swf-theme'
 
-createTheme({
+const theme = createTheme({
 	colors: {
 		// override default colors
 		primary: '#fff',
@@ -52,19 +64,47 @@ createTheme({
 		// NOTE: we encourage mobile first dev by using min-width media queries
 	},
 })
+
+export default theme
 ```
+
+#### Add theme to top of your app
+
+In the top level entry point of your app we can add our global styles from the theme:
+
+NOTE: These should be before any other styles
+
+```jsx
+import { GlobalStyles } from './components/theme.js'
+
+const App = () => {
+	;<>
+		<GlobalStyles />
+		//...rest of your app
+	</>
+}
+```
+
+#### Use the theme in your app
+
+Now you should use this exported theme everywhere in your app that you need it.
+
+NOTE: all methods such as color methods should accessed from the theme that is exported from theme.js
+
+---
 
 ### Call individual methods
 
 ```jsx
 import { colors } from '@swfsoft/swf-theme'
+// This will be the default colors - to use your own colors see "Typical Usage" above
 
 const primaryColor = colors.primary()
 ```
 
 ## Colors
 
-The general color theory is to use as few as possible (most apps only probably need two colors - primary and secondary).
+The general color theory for swf-theme is to use as few as possible (we have found that most apps only probably need two colors - primary and secondary).
 
 All colors are assigned a handler method that can be called when accessing that color:
 

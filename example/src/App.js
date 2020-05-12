@@ -1,9 +1,16 @@
 import React from 'react'
 
-import { FullPalette } from 'swf-theme'
+import { FullPalette, createTheme } from 'swf-theme'
+
+createTheme({
+	colors: {
+		primary: '#f7a707',
+		secondary: '#0569b1',
+	},
+})
 
 const App = () => {
-  return <FullPalette />
+	return <FullPalette />
 }
 
 export default App

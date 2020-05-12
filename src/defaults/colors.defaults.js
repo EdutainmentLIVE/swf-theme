@@ -1,5 +1,3 @@
-
-
 export const colorSettings = {
 	tintOpacity: 0.25,
 	lightenAmount: 25,
@@ -52,5 +50,5 @@ export const darkColors = {
 	grey: '#868b8d',
 
 	bg: colors.black,
-	text: colors.white
+	text: colors.white,
 }

@@ -7,8 +7,6 @@ export const generateGlobalStyles = (config, globalStyleFN) => {
 
 	const disabledGrey = isDarkMode ? colors.grey('dark4') : colors.grey('light4')
 
-	console.log('global styles config: ', config)
-
 	const styles = `
     ${reset}
     ${fontFaces}

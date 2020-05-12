@@ -21,6 +21,8 @@ const FullPalette = () => {
 			<Palette color='warn' bg='black' />
 			<Palette color='grey' />
 			<Palette color='grey' bg='black' />
+			<Palette color='disabled' />
+			<Palette color='disabled' bg='black' />
 		</React.Fragment>
 	)
 }
