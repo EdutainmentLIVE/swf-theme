@@ -1,16 +1,31 @@
 import React from 'react'
 
-import { FullPalette, createTheme } from 'swf-theme'
+import { FullPalette, ThemeProvider, createTheme, createGlobalStyles } from 'swf-theme'
 
-createTheme({
+const theme = createTheme({
 	colors: {
-		primary: '#f7a707',
-		secondary: '#0569b1',
+		primary: 'pink',
+		secondary: 'green',
 	},
 })
 
+const GlobalStyles = createGlobalStyles(theme, {
+	swfUICss: `
+	section {
+		border: solid 4px grey;
+	}
+`,
+})
+
 const App = () => {
-	return <FullPalette />
+	return (
+		<>
+			<GlobalStyles />
+			<ThemeProvider theme={theme}>
+				<FullPalette />
+			</ThemeProvider>
+		</>
+	)
 }
 
 export default App

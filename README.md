@@ -4,6 +4,14 @@
 
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
+---
+
+## WARNING
+
+swf-theme is now built on top of styled-components theming system, and abstracts and extends this library. Some documentation below may be out of date.
+
+---
+
 NOTE: The swf-ui component library is built on top of swf-theme, and swf-theme is built on top of styled components and tiny color.
 
 ## Install

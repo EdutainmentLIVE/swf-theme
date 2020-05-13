@@ -6,7 +6,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { config, colors } from '../theme'
+import { useTheme } from '../theme'
 
 const Block = styled.span`
 	display: inline-block;
@@ -15,9 +15,9 @@ const Block = styled.span`
 	height: 1em;
 	background: ${props => props.color};
 `
-const Wrap = styled.div`
-	background: ${props => colors[props.bg]()};
-	color: ${props => colors[props.bg]({ invert: true })};
+const Wrap = styled.section`
+	background: ${props => props.theme.colors[props.bg]()};
+	color: ${props => props.theme.colors[props.bg]({ invert: true })};
 	padding: 1em;
 	.flex {
 		display: flex;
@@ -28,14 +28,15 @@ const Wrap = styled.div`
 	.color-strip {
 	}
 `
-const ColorStrip = styled.h1`
+const ColorStrip = styled.h6`
 	display: flex;
 	align-items: center;
 	color: ${props => props.color};
 	padding: 0.4em 1.5em;
 	margin: 0;
 `
-const H1 = ({ color, methodName, method }) => {
+const H = ({ color, methodName, method }) => {
+	const { colors } = useTheme()
 	const colorVal = colors[color](method || methodName)
 	return (
 		<ColorStrip className='color-strip' color={colorVal}>
@@ -52,40 +53,37 @@ const Col = ({
 	default: defaultText,
 	includeZero = true,
 }) => {
-	const defaultTxt = defaultText
-		? `NOTE: ${defaultText}`
-		: `NOTE: ${method} = ${method}3`
+	const defaultTxt = defaultText ? `NOTE: ${defaultText}` : `NOTE: ${method} = ${method}3`
 
 	return (
 		<div className='col'>
-			<h3>{`colors.${color}(${method})`}</h3>
-			<H1 color={color} methodName={method} />
+			<p>{`colors.${color}(${method})`}</p>
+			<H color={color} methodName={method} />
 			<em>{defaultTxt}</em>
 			<React.Fragment>
 				{samples
-					? samples.map(s => (
-						<H1 color={color} methodName={`${method}${s}`} key={s} />
-					))
+					? samples.map(s => <H color={color} methodName={`${method}${s}`} key={s} />)
 					: Array(max + 1)
-						.fill('')
-						.map((_, i) =>
-							i > 0 || includeZero ? (
-								<H1
-									color={color}
-									methodName={`${method}${i * multiplier}`}
-									key={`${method}${i * multiplier}`}
-								/>
-							) : null
-						)}
+							.fill('')
+							.map((_, i) =>
+								i > 0 || includeZero ? (
+									<H
+										color={color}
+										methodName={`${method}${i * multiplier}`}
+										key={`${method}${i * multiplier}`}
+									/>
+								) : null
+							)}
 			</React.Fragment>
 		</div>
 	)
 }
 
 const ColorPalette = ({ color = 'primary', bg = 'white' }) => {
+	const { config } = useTheme()
 	return (
 		<Wrap bg={bg}>
-			<H1 color={color} />
+			<H color={color} />
 			<div className='flex'>
 				<Col color={color} method='light' />
 				<Col color={color} method='dark' />
@@ -96,7 +94,7 @@ const ColorPalette = ({ color = 'primary', bg = 'white' }) => {
 					default={`tint = opacity of ${config.colorSettings.tintOpacity}`}
 				/>
 				<div className='col'>
-					<H1 color={color} method={{ brighten: 25 }} methodName='brighten25' />
+					<H color={color} method={{ brighten: 25 }} methodName='brighten25' />
 				</div>
 			</div>
 		</Wrap>

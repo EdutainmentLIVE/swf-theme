@@ -2,10 +2,12 @@ import { createGlobalStyle } from 'styled-components'
 import reset from 'styled-reset'
 import { fluidFontSize } from './font.helpers'
 
-export const generateGlobalStyles = (config, globalStyleFN) => {
+export const generateGlobalStyles = (config, opts = {}) => {
 	const { colors, times, media, fonts, breaks, fontFaces = '', isDarkMode } = config
 
 	const disabledGrey = isDarkMode ? colors.grey('dark4') : colors.grey('light4')
+
+	const { css: projectCSS, swfUICss } = opts
 
 	const styles = `
     ${reset}
@@ -16,7 +18,7 @@ export const generateGlobalStyles = (config, globalStyleFN) => {
 		}
 		body {
 			color: ${colors.text()};
-			font-size: ${fonts.baseSize};
+			font-size: ${fonts.baseSize.px};
 			font-family: ${fonts.textFamily};
     }
 
@@ -208,7 +210,9 @@ export const generateGlobalStyles = (config, globalStyleFN) => {
         font-size: 1.2em;
       }
     }
-	`
-	if (globalStyleFN) return globalStyleFN`${styles}`
+
+    ${swfUICss ? swfUICss : ''}
+    ${projectCSS ? projectCSS : ''}
+  `
 	return createGlobalStyle`${styles}`
 }
