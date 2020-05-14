@@ -80,7 +80,8 @@ const Col = ({
 }
 
 const ColorPalette = ({ color = 'primary', bg = 'white' }) => {
-	const { config } = useTheme()
+	const { colors } = useTheme()
+	// console.log('Palette rendering with theme: ', theme)
 	return (
 		<Wrap bg={bg}>
 			<H color={color} />
@@ -91,7 +92,7 @@ const ColorPalette = ({ color = 'primary', bg = 'white' }) => {
 					color={color}
 					method='tint'
 					samples={['05', 10, 20, 30, 40, 50, 60, 70, 80, 90]}
-					default={`tint = opacity of ${config.colorSettings.tintOpacity}`}
+					default={`tint = opacity of ${colors.colorSettings.tintOpacity}`}
 				/>
 				<div className='col'>
 					<H color={color} method={{ brighten: 25 }} methodName='brighten25' />

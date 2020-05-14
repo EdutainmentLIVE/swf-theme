@@ -14,5 +14,6 @@ export default {
 	breaks,
 	media,
 	times,
+	css: {}, // custom css can be injected here for various elements (mostly used in swf-ui)
 	zMax: 50, // maximum z-index used
 }

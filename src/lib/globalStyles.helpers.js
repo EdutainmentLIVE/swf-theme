@@ -3,11 +3,12 @@ import reset from 'styled-reset'
 import { fluidFontSize } from './font.helpers'
 
 export const generateGlobalStyles = (config, opts = {}) => {
-	const { colors, times, media, fonts, breaks, fontFaces = '', isDarkMode } = config
+	const { colors, times, media, fonts, breaks, fontFaces = '', isDarkMode, css = {} } = config
 
 	const disabledGrey = isDarkMode ? colors.grey('dark4') : colors.grey('light4')
 
 	const { css: projectCSS, swfUICss } = opts
+	const { global } = css
 
 	const styles = `
     ${reset}
@@ -109,17 +110,29 @@ export const generateGlobalStyles = (config, opts = {}) => {
     .flex {
       display: flex;
       flex-wrap: wrap;
+      &.center {
+        align-items: center;
+        justify-content: center;
+      }
     }
     .flex-tablet {
       ${media.tablet} {
         display: flex;
         flex-wrap: wrap;
+        &.center {
+          align-items: center;
+          justify-content: center;
+        }
       }
     }
     .flex-desk {
       ${media.sdesk} {
         display: flex;
         flex-wrap: wrap;
+        &.center {
+          align-items: center;
+          justify-content: center;
+        }
       }
     }
 
@@ -172,8 +185,15 @@ export const generateGlobalStyles = (config, opts = {}) => {
     a, button {
       text-decoration: none;
       color: ${colors.secondary()};
-      &:hover {
+      &:hover, &:active {
         color: ${colors.secondary({ brighten: 10 })};
+        border-color: ${colors.secondary({ brighten: 10 })};
+      }
+    }
+
+    button {
+      &:active {
+        border-style: solid;
       }
     }
 
@@ -212,6 +232,7 @@ export const generateGlobalStyles = (config, opts = {}) => {
     }
 
     ${swfUICss ? swfUICss : ''}
+    ${global ? global : ''}
     ${projectCSS ? projectCSS : ''}
   `
 	return createGlobalStyle`${styles}`

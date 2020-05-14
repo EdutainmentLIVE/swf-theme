@@ -22,38 +22,33 @@ export const createTheme = (configuration = {}, styleComponentsGlobalStylesFunc)
 
 	if (isFunction(configuration)) styleComponentsGlobalStylesFunc = configuration
 
+	const theme = {
+		fluidFontSize,
+	}
+
 	const config = configuration
 
 	// insert any missing options from the defaults
 	defaultsDeep(config, defaultConfig)
 
-	const breaks = generateBreaks(config)
+	theme.css = config.css
 
-	const times = generateTimes(config)
+	theme.breaks = generateBreaks(config)
 
-	const colors = generateColors(config)
+	theme.times = generateTimes(config)
 
-	const media = generateMediaQueries(config)
+	theme.colors = generateColors(config)
 
-	const fonts = generateFonts(config)
+	theme.media = generateMediaQueries(config)
+
+	theme.fonts = generateFonts(config)
+
+	theme.addCSS = css => (theme.css = css)
 
 	if (styleComponentsGlobalStylesFunc !== false)
-		console.info(
-			'SwF Theme initialized with config options: ',
-			config,
-			' | color methods: ',
-			colors
-		)
+		console.info('SwF Theme initialized with config options: ', config, ' | theme: ', theme)
 
-	return {
-		config,
-		breaks,
-		times,
-		media,
-		colors,
-		fonts,
-		fluidFontSize,
-	}
+	return theme
 }
 
 export const ThemeProvider = ({ theme, children }) => {

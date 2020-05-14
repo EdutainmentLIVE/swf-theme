@@ -9,6 +9,12 @@ const theme = createTheme({
 	},
 })
 
+theme.addCSS({
+	h6: `
+		color: black;
+	`,
+})
+
 const GlobalStyles = createGlobalStyles(theme, {
 	swfUICss: `
 	section {
