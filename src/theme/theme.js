@@ -13,12 +13,13 @@ import { generateFonts, fluidFontSize } from '../lib/font.helpers'
 import { generateBreaks } from '../lib/breakpoint.helpers'
 import { generateTimes } from '../lib/times.helpers'
 
+export * from '../lib/gradient.helpers'
+
 export { default as FullPalette } from '../components/FullPalette'
 export { default as Palette } from '../components/Palette'
 
 export const createTheme = (configuration = {}, styleComponentsGlobalStylesFunc) => {
 	// Build exports using provided configuration
-	// NOTE: order here is important!
 
 	if (isFunction(configuration)) styleComponentsGlobalStylesFunc = configuration
 
@@ -45,8 +46,17 @@ export const createTheme = (configuration = {}, styleComponentsGlobalStylesFunc)
 
 	theme.addCSS = css => (theme.css = css)
 
-	if (styleComponentsGlobalStylesFunc !== false)
-		console.info('SwF Theme initialized with config options: ', config, ' | theme: ', theme)
+	if (styleComponentsGlobalStylesFunc !== false && config.printLog !== false) {
+		const emoji = String.fromCodePoint(0x1f44d)
+		console.info(
+			`%c${emoji} SwF Theme - initialized:`,
+			`color: ${theme.colors.white.val}; background-color: ${theme.colors.ok.val}; padding: 4px;`,
+			{
+				config,
+				theme,
+			}
+		)
+	}
 
 	return theme
 }

@@ -4,7 +4,7 @@ import { FullPalette, ThemeProvider, createTheme, createGlobalStyles } from 'swf
 
 const theme = createTheme({
 	colors: {
-		primary: 'pink',
+		primary: '#ff4666',
 		secondary: 'green',
 	},
 })

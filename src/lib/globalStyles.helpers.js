@@ -5,7 +5,7 @@ import { fluidFontSize } from './font.helpers'
 export const generateGlobalStyles = (config, opts = {}) => {
 	const { colors, times, media, fonts, breaks, fontFaces = '', isDarkMode, css = {} } = config
 
-	const disabledGrey = isDarkMode ? colors.grey('dark4') : colors.grey('light4')
+	const disabledGrey = isDarkMode ? colors.grey.dark('4').val : colors.grey.light('4').val
 
 	const { css: projectCSS, swfUICss } = opts
 	const { global } = css
@@ -15,10 +15,10 @@ export const generateGlobalStyles = (config, opts = {}) => {
     ${fontFaces}
     
 		html {
-			background-color: ${colors.bg()};
+			background-color: ${colors.bg.val};
 		}
 		body {
-			color: ${colors.text()};
+			color: ${colors.text.val};
 			font-size: ${fonts.baseSize.px};
 			font-family: ${fonts.textFamily};
     }
@@ -41,7 +41,7 @@ export const generateGlobalStyles = (config, opts = {}) => {
 
     em {
       font-style: italic;
-      color: ${isDarkMode ? colors.text('dark4') : colors.text('light4')};
+      color: ${isDarkMode ? colors.text.dark('4').val : colors.text.light('4').val};
     }
 
     strong {
@@ -53,63 +53,92 @@ export const generateGlobalStyles = (config, opts = {}) => {
     }
     h1 {
       font-size: ${fonts.sizes.h1.em};
-      ${fluidFontSize({
-				maxSize: fonts.baseSize.num * fonts.sizes.h1.num + fonts.baseSize.num,
-				minSize: Math.max(fonts.baseSize.num * fonts.sizes.h1.num * 0.7, fonts.baseSize.num * 1.1),
-				maxViewport: breaks.ldesk.num,
-				minViewport: breaks.tablet.num * 0.7,
-			})}
+      &.fluid {
+        ${fluidFontSize({
+					maxSize: fonts.baseSize.num * fonts.sizes.h1.num + fonts.baseSize.num,
+					minSize: Math.max(
+						fonts.baseSize.num * fonts.sizes.h1.num * 0.7,
+						fonts.baseSize.num * 1.1
+					),
+					maxViewport: breaks.ldesk.num,
+					minViewport: breaks.tablet.num * 0.7,
+				})}
+      }
     }
     h2 {
       font-size: ${fonts.sizes.h2.em};
-      ${fluidFontSize({
-				maxSize: fonts.baseSize.num * fonts.sizes.h2.num + fonts.baseSize.num,
-				minSize: Math.max(fonts.baseSize.num * fonts.sizes.h2.num * 0.7, fonts.baseSize.num * 1.1),
-				maxViewport: breaks.ldesk.num,
-				minViewport: breaks.tablet.num * 0.7,
-			})}
+      &.fluid {
+        ${fluidFontSize({
+					maxSize: fonts.baseSize.num * fonts.sizes.h2.num + fonts.baseSize.num,
+					minSize: Math.max(
+						fonts.baseSize.num * fonts.sizes.h2.num * 0.7,
+						fonts.baseSize.num * 1.1
+					),
+					maxViewport: breaks.ldesk.num,
+					minViewport: breaks.tablet.num * 0.7,
+				})}
+      }
     }
     h3 {
       font-size: ${fonts.sizes.h3.em};
-      ${fluidFontSize({
-				maxSize: fonts.baseSize.num * fonts.sizes.h3.num + fonts.baseSize.num,
-				minSize: Math.max(fonts.baseSize.num * fonts.sizes.h3.num * 0.7, fonts.baseSize.num * 1.1),
-				maxViewport: breaks.ldesk.num,
-				minViewport: breaks.tablet.num * 0.7,
-			})}
+      &.fluid {
+        ${fluidFontSize({
+					maxSize: fonts.baseSize.num * fonts.sizes.h3.num + fonts.baseSize.num,
+					minSize: Math.max(
+						fonts.baseSize.num * fonts.sizes.h3.num * 0.7,
+						fonts.baseSize.num * 1.1
+					),
+					maxViewport: breaks.ldesk.num,
+					minViewport: breaks.tablet.num * 0.7,
+				})}
+      }
     }
     h4 {
       font-size: ${fonts.sizes.h4.em};
-      ${fluidFontSize({
-				maxSize: fonts.baseSize.num * fonts.sizes.h4.num + fonts.baseSize.num,
-				minSize: Math.max(fonts.baseSize.num * fonts.sizes.h4.num * 0.7, fonts.baseSize.num * 1.1),
-				maxViewport: breaks.ldesk.num,
-				minViewport: breaks.tablet.num * 0.7,
-			})}
+      &.fluid {
+        ${fluidFontSize({
+					maxSize: fonts.baseSize.num * fonts.sizes.h4.num + fonts.baseSize.num,
+					minSize: Math.max(
+						fonts.baseSize.num * fonts.sizes.h4.num * 0.7,
+						fonts.baseSize.num * 1.1
+					),
+					maxViewport: breaks.ldesk.num,
+					minViewport: breaks.tablet.num * 0.7,
+				})}
+      }
     }
     h5 {
       font-size: ${fonts.sizes.h5.em};
-      ${fluidFontSize({
-				maxSize: fonts.baseSize.num * fonts.sizes.h5.num + fonts.baseSize.num,
-				minSize: Math.max(fonts.baseSize.num * fonts.sizes.h5.num * 0.7, fonts.baseSize.num * 1.1),
-				maxViewport: breaks.ldesk.num,
-				minViewport: breaks.tablet.num * 0.7,
-			})}
+      &.fluid {
+        ${fluidFontSize({
+					maxSize: fonts.baseSize.num * fonts.sizes.h5.num + fonts.baseSize.num,
+					minSize: Math.max(
+						fonts.baseSize.num * fonts.sizes.h5.num * 0.7,
+						fonts.baseSize.num * 1.1
+					),
+					maxViewport: breaks.ldesk.num,
+					minViewport: breaks.tablet.num * 0.7,
+				})}
+      }
     }
     h6 {
       font-size: ${fonts.sizes.h6.em};
-      ${fluidFontSize({
-				maxSize: fonts.baseSize.num * fonts.sizes.h6.num + fonts.baseSize.num,
-				minSize: Math.max(fonts.baseSize.num * fonts.sizes.h6.num * 0.7, fonts.baseSize.num * 1.1),
-				maxViewport: breaks.ldesk.num,
-				minViewport: breaks.tablet.num * 0.7,
-			})}
+      &.fluid {
+        ${fluidFontSize({
+					maxSize: fonts.baseSize.num * fonts.sizes.h6.num + fonts.baseSize.num,
+					minSize: Math.max(
+						fonts.baseSize.num * fonts.sizes.h6.num * 0.7,
+						fonts.baseSize.num * 1.1
+					),
+					maxViewport: breaks.ldesk.num,
+					minViewport: breaks.tablet.num * 0.7,
+				})}
+      }
       font-weight: bold;
     }
 
     .flex {
       display: flex;
-      flex-wrap: wrap;
       &.center {
         align-items: center;
         justify-content: center;
@@ -118,7 +147,6 @@ export const generateGlobalStyles = (config, opts = {}) => {
     .flex-tablet {
       ${media.tablet} {
         display: flex;
-        flex-wrap: wrap;
         &.center {
           align-items: center;
           justify-content: center;
@@ -128,7 +156,6 @@ export const generateGlobalStyles = (config, opts = {}) => {
     .flex-desk {
       ${media.sdesk} {
         display: flex;
-        flex-wrap: wrap;
         &.center {
           align-items: center;
           justify-content: center;
@@ -146,7 +173,7 @@ export const generateGlobalStyles = (config, opts = {}) => {
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: ${colors.bg('tint80')};
+      background-color: ${colors.bg.tint(8)};
     }
 
     button, a, input, textarea {
@@ -184,10 +211,10 @@ export const generateGlobalStyles = (config, opts = {}) => {
     }
     a, button {
       text-decoration: none;
-      color: ${colors.secondary()};
+      color: ${colors.secondary.val};
       &:hover, &:active {
-        color: ${colors.secondary({ brighten: 10 })};
-        border-color: ${colors.secondary({ brighten: 10 })};
+        color: ${colors.secondary.calc().brighten(10).toString()};
+        border-color: ${colors.secondary.calc().brighten(10).toString()};
       }
     }
 
