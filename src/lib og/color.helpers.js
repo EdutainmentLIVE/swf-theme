@@ -182,7 +182,7 @@ class SwfColor {
 	}
 
 	tint = amount => {
-		const tintAmount = typeof amount === 'number' ? amount * 0.01 : this.conf.tint || 30
+		const tintAmount = typeof amount === 'number' ? amount * 0.01 : this.conf.tint
 		const Color = tinyColor(this.val).setAlpha(tintAmount)
 		Color.val = Color.toString()
 		return new SwfColor(Color.val, this.config)
@@ -191,11 +191,11 @@ class SwfColor {
 	invert = () => {
 		const Color = tinyColor(this.val)
 		if (Color.isDark()) {
-			Color.val = this.conf.white
+			this.val = this.conf.white
 		} else if (Color.isLight()) {
-			Color.val = this.conf.black
-		} else Color.val = Color.spin(180).toString()
-		return new SwfColor(Color.val, this.config)
+			this.val = this.conf.black
+		} else this.val = Color.spin(180).toString()
+		return this
 	}
 
 	calc = () => tinyColor(this.val)

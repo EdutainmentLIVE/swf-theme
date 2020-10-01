@@ -1,6 +1,7 @@
 import React from 'react'
 
-import { FullPalette, ThemeProvider, createTheme, createGlobalStyles } from 'swf-theme'
+import { ThemeProvider, createTheme, createGlobalStyles } from 'swf-theme'
+import FullPalette from './components/FullPalette'
 
 const theme = createTheme({
 	colors: {
@@ -15,13 +16,7 @@ theme.addCSS({
 	`,
 })
 
-const GlobalStyles = createGlobalStyles(theme, {
-	swfUICss: `
-	section {
-		border: solid 4px grey;
-	}
-`,
-})
+const GlobalStyles = createGlobalStyles(theme)
 
 const App = () => {
 	return (

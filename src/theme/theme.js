@@ -15,22 +15,18 @@ import { generateTimes } from '../lib/times.helpers'
 
 export * from '../lib/gradient.helpers'
 
-export { default as FullPalette } from '../components/FullPalette'
-export { default as Palette } from '../components/Palette'
-
 export const createTheme = (configuration = {}, styleComponentsGlobalStylesFunc) => {
 	// Build exports using provided configuration
 
 	if (isFunction(configuration)) styleComponentsGlobalStylesFunc = configuration
 
-	const theme = {
-		fluidFontSize,
-	}
 
 	const config = configuration
 
 	// insert any missing options from the defaults
-	defaultsDeep(config, defaultConfig)
+	const theme = defaultsDeep(config, defaultConfig)
+
+	theme.fluidFontSize = fluidFontSize
 
 	theme.css = config.css
 
@@ -49,7 +45,7 @@ export const createTheme = (configuration = {}, styleComponentsGlobalStylesFunc)
 	if (styleComponentsGlobalStylesFunc !== false && config.printLog !== false) {
 		const emoji = String.fromCodePoint(0x1f44d)
 		console.info(
-			`%c${emoji} SwF Theme - initialized:`,
+			`%c${emoji} SwF Theme - initialized${config.context ? ` from [${config.context}]` : ''}:`,
 			`color: ${theme.colors.white.val}; background-color: ${theme.colors.ok.val}; padding: 4px;`,
 			{
 				config,

@@ -1,8 +1,6 @@
 export const createMediaQuery = ({ min, max, r, o }) =>
-	`@media only screen ${min ? `and (min-width: ${min})` : ''} ${
-		max ? `and (max-width: ${max})` : ''
-	} ${r ? `and (-webkit-min-device-pixel-ratio: ${r}px)` : ''} ${
-		o ? `and (orientation: ${o})` : ''
+	`@media only screen ${min ? `and (min-width: ${min})` : ''} ${max ? `and (max-width: ${max})` : ''
+	} ${r ? `and (-webkit-min-device-pixel-ratio: ${r}px)` : ''} ${o ? `and (orientation: ${o})` : ''
 	}`
 
 export const generateMediaQueries = config => {

@@ -7,7 +7,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import isString from 'lodash/isString'
-import { useTheme } from '../theme'
+import { useTheme } from 'swf-theme'
 
 const Block = styled.span`
 	display: inline-block;
@@ -37,10 +37,11 @@ const ColorStrip = styled.h6`
 	margin: 0;
 `
 const H = ({ colorVal, method, preset }) => {
+	const colr = isString(colorVal) ? colorVal : 'black'
 	return (
-		<ColorStrip className='color-strip' color={colorVal}>
+		<ColorStrip className='color-strip' color={colr}>
 			{preset ? `${method}(${isString(preset) ? `'${preset}'` : preset})` : method}{' '}
-			{colorVal && <Block color={colorVal} />}
+			{colorVal && <Block color={colr} />}
 		</ColorStrip>
 	)
 }
@@ -48,7 +49,7 @@ const Col = ({ colorName, method, colorVal, presets, default: defaultText }) => 
 	const defaultTxt = defaultText ? `NOTE: ${defaultText}` : `NOTE: ${method} = ${method}('3')`
 	const { colors } = useTheme()
 	const color = colorVal || colors[colorName][method]().val
-	// console.log('colorName: ', colorName, ' results in: ', color)
+	console.log('colorName: ', colorName, 'method: ', method, ' results in: ', color)
 	return (
 		<div className='col'>
 			<p>{`colors.${colorName}.${method}`}</p>
@@ -58,8 +59,8 @@ const Col = ({ colorName, method, colorVal, presets, default: defaultText }) => 
 				{presets &&
 					presets.map(preset => {
 						// console.log(
-						// 	'colors: ',
-						// 	colors,
+						// 'colors: ',
+						// colors,
 						// 	' | colorName: ',
 						// 	colorName,
 						// 	' | method: ',
@@ -93,7 +94,7 @@ const ColorPalette = ({ color: colorName = 'primary', bg = 'white' }) => {
 				<Col
 					colorName={colorName}
 					method='tint'
-					colorVal={colors[colorName].tint()}
+					colorVal={colors[colorName].tint().val}
 					presets={[5, 10, 20, 30, 40, 50, 60, 70, 80, 90]}
 					default={`tint = opacity of ${colors.colorSettings.tintOpacity}`}
 				/>
