@@ -30,9 +30,9 @@ class SwfColor {
 	dark = preset => {
 		let amount = typeof preset === 'string' ? preset : this.conf.dark
 		if (typeof preset === 'number') {
-			if (preset < 6) {
+			if (preset < 7) {
 				amount = preset.toString()
-			}
+			} else amount = preset
 		}
 
 		switch (amount) {
@@ -69,9 +69,9 @@ class SwfColor {
 	light = preset => {
 		let amount = typeof preset === 'string' ? preset : this.conf.light
 		if (typeof preset === 'number') {
-			if (preset < 6) {
+			if (preset < 7) {
 				amount = preset.toString()
-			}
+			} else amount = preset
 		}
 		switch (amount) {
 			case '0':
@@ -106,9 +106,9 @@ class SwfColor {
 	sat = preset => {
 		let amount = typeof preset === 'string' ? preset : this.conf.sat
 		if (typeof preset === 'number') {
-			if (preset < 6) {
+			if (preset < 7) {
 				amount = preset.toString()
-			}
+			} else amount = preset
 		}
 
 		switch (amount) {
@@ -145,9 +145,9 @@ class SwfColor {
 	desat = preset => {
 		let amount = typeof preset === 'string' ? preset : this.conf.desat
 		if (typeof preset === 'number') {
-			if (preset < 6) {
+			if (preset < 7) {
 				amount = preset.toString()
-			}
+			} else amount = preset
 		}
 
 		switch (amount) {
