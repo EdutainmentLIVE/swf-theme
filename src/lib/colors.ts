@@ -89,7 +89,7 @@ export type Fallbacks = {
 }
 
 const defaultFallbacks = {
-	tint: 0.25,
+	tint: 25,
 	lighten: 25,
 	darken: 20,
 	saturate: 40,

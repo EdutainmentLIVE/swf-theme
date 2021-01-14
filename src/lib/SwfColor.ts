@@ -223,7 +223,8 @@ export class SwfColor {
 	}
 
 	tint: (val?: number) => SwfColor = (amount): SwfColor => {
-		const tintAmount = typeof amount === 'number' ? amount * 0.01 : this.conf.tint
+		let tintAmount = typeof amount === 'number' ? amount : this.conf.tint
+		tintAmount = tintAmount * 0.01 // convert to css opacity value
 		const Color = tinyColor(this.val).setAlpha(tintAmount)
 		return new SwfColor(Color.toString(), this.config)
 	}

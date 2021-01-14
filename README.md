@@ -1,20 +1,22 @@
 # swf-theme
 
-> Theming system for swf react.js projects.
-
-[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+> SwfSoft theming system for [Styled Components](https://styled-components.com)
 
 ---
 
-## WARNING
+swf-theme generates a theme object that is designed to be used to configure a [styled components theme](https://styled-components.com/docs/advanced#theming), however it is not strickly opinionated and in addition to organizing values for styling, also exposes other useful methods for working with colors, typography, etc.
 
-swf-theme is now built on top of styled-components theming system, and abstracts and extends this library. Some documentation below may be out of date.
+NOTE: Documentation is for version 2.0.1
 
 ---
-
-NOTE: The swf-ui component library is built on top of swf-theme, and swf-theme is built on top of styled components and tiny color.
 
 ## Install
+
+```bash
+yarn add @swfsoft/swf-theme
+```
+
+or
 
 ```bash
 npm install --save @swfsoft/swf-theme
@@ -22,7 +24,7 @@ npm install --save @swfsoft/swf-theme
 
 ## Basic Usage
 
-In the top level entry point of your app (e.g., App.js):
+This will return a theme object that can be used throughout your application:
 
 ```jsx
 import {createTheme} from '@swfsoft/swf-theme'
@@ -34,19 +36,27 @@ NOTE: (this will accept custom defaults, to use your own defaults see "Typical U
 
 ---
 
-## Typical Usage
+## Typical Usage (with styled components)
+
+First install styled components:
+
+```
+npm install --save styled-components
+```
 
 #### Create theme file
 
-This can live anywhere in your directory structure but typical convention would be to have it somewhere near or inside of your components directory:
+Create a file somewhere in your project (generally close to the root or src directory):
 
 ```
-components/theme.js
+src/theme.js
 ```
 
-#### Instantiate theme
+#### Create theme
 
 In theme.js instantiate and export your theme:
+
+NOTE: for full list of defaults that can be overriden see below
 
 ```jsx
 import { createTheme } from '@swfsoft/swf-theme'
@@ -76,11 +86,35 @@ const theme = createTheme({
 export default theme
 ```
 
-#### Add theme to top of your app
+#### Create global styles (optional)
 
-In the top level entry point of your app we can add our global styles from the theme:
+[Styled-components](https://styled-components.com/docs/api#createglobalstyle) provides a helper function for generating global styles.
 
-NOTE: These should be before any other styles
+These global styles additionally have direct access to the theme just like a typical styled component.
+
+HINT: These should be used sparingly and only target blanket html elements for reset, or default purposes. Generally, the real power of styled-components is to scope your styles to specific components.
+
+**Global styles can be exported from the theme.js file:**
+
+```jsx
+import {createGlobalStyles} from 'styled-components'
+import { createTheme } from '@swfsoft/swf-theme'
+
+export const ProjectGlobalStyles = createGlobalStyles`
+  body {
+    position: relative;
+    color: ${props => (props.theme.colors.black.val)};
+  }
+`
+
+const theme = createTheme({
+	colors: {
+		// override default colors
+		primary: '#fff',
+		secondary: '#fff',
+    ...
+
+```
 
 ```jsx
 import { GlobalStyles } from './components/theme.js'
@@ -93,122 +127,219 @@ const App = () => {
 }
 ```
 
-#### Use the theme in your app
+### Create the theme provider
 
-Now you should use this exported theme everywhere in your app that you need it.
+Styled-components provides a theme provider that should included at the entry point to your app.
 
-NOTE: all methods such as color methods should accessed from the theme that is exported from theme.js
+NOTE: GlobalStyles must be rendered inside of the ThemeProvider.
+
+HINT: Render the ProjectGlobalStyles after the GlobalStyles from Swf-Theme to override these.
+
+```jsx
+import { ThemeProvider } from 'styled-components'
+import { GlobalStyles } from '@swfsoft/swf-theme'
+import theme, { ProjectGlobalStyles } from 'src/theme'
+
+const App = ({ children }) => (
+	<ThemeProvider theme={theme}>
+		<GlobalStyles />
+		<ProjectGlobalStyles />
+		{children}
+	</ThemeProvider>
+)
+```
+
+### Use the theme in components
+
+The theme is automatically inserted as props in all styled components throughout the app:
+
+Fo more information about using styled-components take a look at their [documentation](https://styled-components.com/docs/)
+
+```jsx
+import styled from 'styled-components'
+
+const MyComponent = styled.div`
+	color: ${props => props.theme.colors.primary.val};
+`
+```
 
 ---
 
-### Call individual methods
+## Theme Options
 
-```jsx
-import { colors } from '@swfsoft/swf-theme'
-// This will be the default colors - to use your own colors see "Typical Usage" above
+| Option         | Details                  | Defaults                  |
+| -------------- | ------------------------ | ------------------------- |
+| colors         | See defaults for options | See color defaults below  |
+| colorFallbacks | See defaults for options | See color fallbacks below |
+| breaks         | See defaults for options | See breaks defaults below |
+| sizes          | See defaults for options | See sizes defaults below  |
+| times          | See defaults for options | See times defaults below  |
 
-const primaryColor = colors.primary()
-```
+---
 
 ## Colors
 
-The general color theory for swf-theme is to use as few as possible (we have found that most apps only probably need two colors - primary and secondary).
+Swf-theme will create an instance of a SwfColor handler class for every color that can be used to run a handful of useful color manipulation operations.
 
-All colors are assigned a handler method that can be called when accessing that color:
+NOTE: Swf-theme uses [TinyColor2](https://github.com/bgrins/TinyColor) to perform color manipulation operations under the hood.
+
+Available operations:
+| | Description | Default value |
+|--------|------------------------------------------------------------|---------------|
+| light | Will lighten the color by a percentage value from 7-100 | 25 |
+| dark | Will darken the color by a percentage value from 7-100 | 20 |
+| sat | Will saturate the color by a percentage value from 7-100 | 40 |
+| desat | Will desaturate the color by a percentage value from 7-100 | 40 |
+| tint | Will change the opacity to a percentage value | 25 |
+| invert | Will invert the color based on the standard color wheel | n/a |
+
+### Preset operations
+
+You may notice that the percentage value for operations is from 7-100. That's because the values 0-6 are reserved for presets. These are useful for more consistent variations across the application.
+
+The presets are automatically generated off of the colorFallback settings and are based on a percentage offset below and above the fallback, where each number from 0-6 represent a value either above or below the fallback percentage.
+
+For example the `light` operation presets look like this (assuming the fallback is the default value of `25`%):
+| | Lightens color by | Multiplier |
+|---|-------------------|------------|
+| 0 | 10% | 0.4 |
+| 1 | 15% | 0.6 |
+| 2 | 20% | 0.8 |
+| 3 | 25% | 1 |
+| 4 | 30% | 1.2 |
+| 5 | 35% | 1.4 |
+| 6 | 40% | 1.6 |
+
+NOTE: The same multipliers are used for `light`, `dark`, `sat`, and `desat` operations.
+
+`tint` operation does not use presets but if no value is passed in will use fallback value (default is `25`).
+
+**example usege with styled-components:**
+
+Lightens primary color value by 25% (no value defaults to preset of `3`)
 
 ```jsx
-import { colors } from '@swfsoft/swf-theme'
+import styled from 'styled-componets'
 
-const primaryColor = colors.primary()
+const MyStyledDiv = styled.div`
+	color: ${props => props.theme.colors.primary.light().val};
+`
 ```
 
-These methods accept either a preset string argument or else an options object.
-
-Example with preset string argument:
+Lightens by 15% (based on preset table above)
 
 ```jsx
-const lightPrimaryColor = colors.primary('light')
-// returns the color lightened by the lightenAmount in the colorSettings
+import styled from 'styled-componets'
+
+const MyStyledDiv = styled.div`
+	color: ${props => props.theme.colors.primary.light(1).val};
+`
 ```
 
-Example with options object:
+Lightens by 7% (only values `0-6` use presets, so we just use the raw value as a percentage)
 
 ```jsx
-const lightPrimaryColor = colors.primary({ lighten: 20 })
-// returns the color lightened by the darkenAmount in the colorSettings
+import styled from 'styled-componets'
+
+const MyStyledDiv = styled.div`
+	color: ${props => props.theme.colors.primary.light(7).val};
+`
 ```
 
-### Color Settings
+NOTE: values above `100` are treated as 100%.
 
-NOTE: These are passed in when creating the theme e.g.:
+**Operations can also be chained:**
+Lightens by 22% and changes opacity to 60%
 
 ```jsx
-createTheme({
-	colorSettings: {
-		lightenAmount: 25,
-	},
-})
+import styled from 'styled-componets'
+
+const MyStyledDiv = styled.div`
+	color: ${props => props.theme.colors.primary.light(22).tint(60).val};
+`
 ```
 
-| Setting       | Description                                                                                            | Default |
-| ------------- | ------------------------------------------------------------------------------------------------------ | ------- |
-| lightenAmount | base number (1-100) to use during lighten preset calculations. Note: this will be 'light' and 'light3' | 25      |
-| darkenAmount  | base number (1-100) to use during darken preset calculations. Note: this will be 'dark' and 'dark3'    | 20      |
-| tintOpacity   | default tint opacity (when using preset 'tint'). Note: this will be 'tint'                             | 0.25    |
+**Calling `.val`**
 
-### Color method options
+Since all operations return another SwfColor class instance you will need to use `.val` at the end to return the calculated color value.
 
-NOTE: These are passed in when calling the color method (e.g., `primary({lighten: 30})`)
-| Option | Description |
-|---------- |------------------------------------ |
-| lighten | lightens color by number (1-100) |
-| darken | darkens color by number (1-100) |
-| brighten | brightens color by number (1-100) |
-| opacity | sets opacity by number (0-1) |
-| desat | desaturate color by number (1-100) |
-| sat | saturate color by number (1-100) |
-| invert | inverts color on color wheel |
+This includes the raw color (remember this is also SwfColor class instance):
 
-### Color method presets
+```jsx
+import styled from 'styled-componets'
 
-Handy preset built in color methods
-NOTE: These should be entered as a string (e.g., `primary('light3')`)
-| Preset | Description |
-|--------------------- |-------------------------------------------------------- |
-| light | same as 'light3' |
-| light1-6 ('light3') | lightened incrementally based on 'lightenAmount' value |
-| dark | same as 'dark3' |
-| dark1-6 ('dark3') | darkened incrementally based on 'darkenAmount' value |
-| tint | same as 'tint3' |
-| tint0-10 ('tint3') | adjusts alpha in increments of 10% (rgba(0,0,0,0.3) |
-| tint05 | special 5% alpha |
+const MyStyledDiv = styled.div`
+	color: ${props => props.theme.colors.primary.val};
+`
+```
 
-NOTE: All color processes are handled by [TinyColor](https://github.com/bgrins/TinyColor)
+### Defaults
+
+**Main defaults:**
+| | Default | Intended usage |
+|-----------|-----------|---------------------------------------------------------|
+| primary | #0569b1 | backgrounds, borders, etc |
+| secondary | #f7a707 | CTAs, links, emphasis, etc |
+| aux1 | #7990ad | accent color - less emphasis, sub-content for CTA, etc. |
+| aux2 | #79a6ad | Alternative accent color - rarely needed |
+
+**Utility defaults:**
+| | Default | Description |
+|----------|---------|--------------------------------------|
+| ok | #5bbb12 | green - success color |
+| err | #df1500 | red - error/alert color |
+| warn | #ff9900 | orange - warning/info color |
+| disabled | #c0c4c5 | grey - disabled interactive elements |
+
+---
+
+**Monochromatic defaults**
+| | Default | Intended usage |
+|-------|---------|-----------------|
+| black | #000 | General purpose |
+| white | #FFF | General purpose |
+| grey | #868b8d | General purpose |
+
+**By Name Defaults**
+| | Default |
+|----------|---------|
+| blue | #0e8be4 |
+| brown | #866f3c |
+| purple | #7032d0 |
+| orange | #e88d00 |
+| slate | #3a3f42 |
+| midnight | #1c1e1f |
+
+**Fallback defaults**
+
+```js
+colorFallbacks: {
+  lighten: 25,
+  darken: 25,
+  saturate: 40,
+  desaturate: 40,
+  tint: 0.25
+}
+```
 
 ## Breaks
 
-Break-point presets.
+Break-point presets. Also see Media below for media queries.
 
-Example:
+Default breaks:
 
-```jsx
-import { breaks } from '@swfsoft/swf-theme'
-
-const tabletBreakpoint = breaks.tablet.px
-```
-
-Default breakpoints look like:
-
-```jsx
+```js
 {
   tablet: {
     num: 767
     px: '767px'
   },
+  // small desktop
   sdesk: {
     num: 1112
     px: '1112px'
   },
+  // large desktop
   ldesk: {
     num: 1480
     px: '1480px'
@@ -220,43 +351,122 @@ Default breakpoints look like:
 
 There are some media query builder helpers that use the values set in the breaks.
 
-Example media helper using styled components:
+Example tablet media query:
 
 ```jsx
 import styled from 'styled-components'
-import { media } from '@swfsoft/swf-theme'
 
 const StyledComponent = styled`
-  ${media.tablet} {
+  ${props => props.theme.media.tablet} {
     display: block;
   }
 `
-// same as: @media only screen and (min-device-width: ${breaks.tablet.px})
 ```
+
+This is the same as:
+
+```css
+@media only screen and (min-device-width: ${props => (props.theme.breaks.tablet.px)}) {
+  display: block;
+}
+```
+
+Options:
+
+|        | Targets                          | Media Query (based on default breaks)      |
+| ------ | -------------------------------- | ------------------------------------------ |
+| mobile | under tablet width (mobile only) | @media only screen and (max-width: 766px)  |
+| tablet | tablet width and above           | @media only screen and (min-width: 767px)  |
+| sdesk  | sdesk width and above            | @media only screen and (min-width: 1112px) |
+| ldesk  | ldesk width and above            | @media only screen and (min-width: 1480px) |
+
+---
+
+## Times
+
+For css transitions, animations, etc.
+
+HINT: When accessed via `useTheme`, these are also handy for setTimouts or triggered transitions in js that need to time with css transitions.
+
+NOTE: Values are in milliseconds
+
+defaults:
+
+```js
+{
+  short: 100
+  med: 250
+  long: 500
+  ease: "ease-in-out"
+  // handy presets for css transitions
+  tranS: "100ms ease-in-out",
+  tranM: "250ms ease-in-out",
+  tranL: "500ms ease-in-out"
+}
+
+```
+
+---
+
+## Sizes
+
+Semi-opinionated values for maintaining global styles accross your app.
+
+defaults:
+
+```js
+{
+  fonts: {
+    // base font size (GlobalStyles automatically applies this to the body tag)
+    base: {
+      px: "15px",
+      num: 15
+    },
+  },
+  // global header
+  header: {
+    mobile: {
+      px: "40px",
+      num: 40
+    },
+    tablet: {
+      px: "50px",
+      num: 50
+    },
+    sdesk: {
+      px: "80px",
+      num: 80
+    }
+  }
+  // page gutters (spacing from left and right sides of the view port)
+  gutter: {
+    mobile: {
+      em: "1.1em",
+      num: 1.1
+    },
+    tablet: {
+      vw: "0.5vw",
+      num: 0.5
+    },
+    sdesk: {
+      vw: "4vw",
+      num: 4
+    },
+    ldesk: {
+      vw: "6vw",
+      num: 6
+    }
+  }
+}
+```
+
+---
 
 ## Fonts
 
-#### Heading element sizes
+TODO: add docs
 
-Can be found at:
-
-```jsx
-import {fonts} from '@swfsoft/swf-theme'
-
-const {sizes} = fonts
-
-const {
-	h1: {
-		num: 4,
-		em: '4em' // by default h sizes use em units, but this can be set at fonts.hUnit
-	},
-	h2,
-	h3,
-	etc...
-} = sizes
-```
-
-#### FluidFontSizes
+### FluidFontSizes
 
 Function for generating font-sizes using css calculations. It returns css calculations based on options passed in (if no options passed in, will use values when creating the theme)
 
@@ -270,13 +480,11 @@ const H1 = styled.h1`
 	${fluidFontSize({
 		minSize: 22, // in pixels
 		maxSize: 45, // in pixels
-		minViewport: 320, // is fixed at minSize below this threshold
-		maxViewport: 1480, // is fixed at maxSize above this threshold
+		minViewport: 320, // is fixed at minSize below this threshold (defaults to breaks.mobile)
+		maxViewport: 1480, // is fixed at maxSize above this threshold (defaults to breaks.ldesk)
 	})}
 `
 ```
-
-NOTE: All heading elements have fluidFontSizes applied in the GlobalStyles -see below
 
 ## Global styles
 
@@ -384,10 +592,36 @@ createTheme({
 })
 ```
 
-## Theme Options
+## Typescript
 
-> Todo: finish this section
+Swf-theme is built on typescript and exports the following types:
+
+- Theme
+- ThemeConfig
+
+In order to use Swf-theme in typescript project with styled-components you will need to follow the steps laid out in [styled-components](https://styled-components.com/docs/api#typescript) for getting type support inside styled components:
+
+### Install types:
+
+```
+npm install @types/styled-components
+```
+
+### Create declarations file:
+
+```ts
+import 'styled-components'
+import {Theme} from '@swfsoft/swf-theme'
+
+declare module 'styled-components' {
+  export interface DefaultTheme extends Theme
+}
+```
+
+Now you should get type inference inside of styled components
+
+---
 
 ## License
 
-ISC © [swiftforge](https://github.com/swiftforge)
+MIT © [swiftforge](https://github.com/swiftforge)

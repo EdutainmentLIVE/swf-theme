@@ -1,10 +1,14 @@
-import { NumVal } from '../types'
+import { NumPx, NumVal } from '../types'
 
 export type SizeOptions = {
+	font?: {
+		base?: NumPx
+	}
 	gutter?: {
 		mobile?: NumVal
 		tablet?: NumVal
 		sdesk?: NumVal
+		ldesk?: NumVal
 	}
 	header?: {
 		mobile?: NumVal
@@ -14,27 +18,45 @@ export type SizeOptions = {
 }
 
 export type Sizes = {
+	font: {
+		base: NumPx
+	}
 	gutter: {
-		mobile?: NumVal
-		tablet?: NumVal
-		sdesk?: NumVal
+		mobile: NumVal
+		tablet: NumVal
+		sdesk: NumVal
+		ldesk: NumVal
 	}
 	header: {
-		mobile?: NumVal
-		tablet?: NumVal
-		sdesk?: NumVal
+		mobile: NumVal
+		tablet: NumVal
+		sdesk: NumVal
 	}
 }
 
 const defaultOptions = {
+	font: {
+		base: {
+			num: 15,
+			px: '15px',
+		},
+	},
 	gutter: {
 		mobile: {
 			num: 1.1,
 			em: '1.1em',
 		},
+		tablet: {
+			num: 0.5,
+			vw: '0.5vw',
+		},
 		sdesk: {
 			num: 4,
 			vw: '4vw',
+		},
+		ldesk: {
+			num: 6,
+			vw: '6vw',
 		},
 	},
 	header: {
@@ -57,5 +79,5 @@ export const createSizes = (options: SizeOptions = {}): Sizes => {
 	return {
 		...defaultOptions,
 		...options,
-	}
+	} as Sizes
 }
