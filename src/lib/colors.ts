@@ -22,6 +22,8 @@ export type ColorOptions = {
 	grey?: string
 	black?: string
 	white?: string
+
+	[x: string]: any
 }
 
 export type ColorValues = {
@@ -88,7 +90,7 @@ export type Fallbacks = {
 	desaturate: number
 }
 
-const defaultFallbacks = {
+export const defaultFallbacks = {
 	tint: 25,
 	lighten: 25,
 	darken: 20,
@@ -96,7 +98,7 @@ const defaultFallbacks = {
 	desaturate: 40,
 }
 
-const defaultColors = {
+export const defaultColors = {
 	primary: '#0569b1',
 	secondary: '#f7a707',
 	aux1: '#7990ad',

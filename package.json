@@ -37,6 +37,7 @@
 		"lodash-es": "^4.17.20",
 		"ora": "^4.0.4",
 		"styled-components": "^5.2.1",
+		"styled-reset": "^4.3.4",
 		"tinycolor2": "^1.4.2",
 		"tslib": "^2.0.0"
 	},

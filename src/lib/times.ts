@@ -3,6 +3,7 @@ export type TimeOptions = {
 	med?: number
 	long?: number
 	ease?: string
+	[x: string]: any
 }
 
 export type Times = {
@@ -15,12 +16,16 @@ export type Times = {
 	ease: string
 }
 
+export const defaultTimes = {
+	short: 100,
+	med: 250,
+	long: 500,
+	ease: 'ease-in-out',
+}
+
 export const createTimes = (options: TimeOptions = {}): Times => {
 	const config = {
-		short: 100,
-		med: 250,
-		long: 500,
-		ease: 'ease-in-out',
+		...defaultTimes,
 		...options,
 	}
 	return {

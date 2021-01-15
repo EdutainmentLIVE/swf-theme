@@ -1,9 +1,11 @@
 import { NumPx, NumVal } from '../types'
+import { generateHsizes, HsizeOptions, Hsizes } from './fonts'
 
 export type SizeOptions = {
 	font?: {
 		base?: NumPx
-	}
+		h?: Hsizes
+	} & HsizeOptions
 	gutter?: {
 		mobile?: NumVal
 		tablet?: NumVal
@@ -15,12 +17,13 @@ export type SizeOptions = {
 		tablet?: NumVal
 		sdesk?: NumVal
 	}
+	[x: string]: any
 }
 
 export type Sizes = {
 	font: {
 		base: NumPx
-	}
+	} & Hsizes
 	gutter: {
 		mobile: NumVal
 		tablet: NumVal
@@ -34,12 +37,13 @@ export type Sizes = {
 	}
 }
 
-const defaultOptions = {
+export const defaultSizes: Sizes = {
 	font: {
 		base: {
 			num: 15,
 			px: '15px',
 		},
+		...generateHsizes(),
 	},
 	gutter: {
 		mobile: {
@@ -77,7 +81,7 @@ const defaultOptions = {
 
 export const createSizes = (options: SizeOptions = {}): Sizes => {
 	return {
-		...defaultOptions,
+		...defaultSizes,
 		...options,
 	} as Sizes
 }

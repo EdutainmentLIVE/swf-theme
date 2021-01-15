@@ -4,6 +4,7 @@ export type BreakOptions = {
 	tablet?: NumPx
 	sdesk?: NumPx
 	ldesk?: NumPx
+	[x: string]: any
 }
 export type Breaks = {
 	tablet: NumPx
@@ -17,7 +18,7 @@ export type Medias = {
 	ldesk: string
 }
 
-const defaultOptions = {
+export const defaultBreaks = {
 	tablet: {
 		num: 767,
 		px: '767px',
@@ -34,7 +35,7 @@ const defaultOptions = {
 
 export const createBreaks = (options: BreakOptions = {}): Breaks => {
 	const config = {
-		...defaultOptions,
+		...defaultBreaks,
 		...options,
 	}
 
