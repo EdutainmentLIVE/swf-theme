@@ -1,6 +1,6 @@
 {
 	"name": "@swfsoft/swf-theme",
-	"version": "2.0.2",
+	"version": "2.0.3",
 	"description": "Theming system for swf react.js projects",
 	"author": "swiftforge",
 	"license": "MIT",
@@ -17,7 +17,7 @@
 		"build:watch": "rollup -c -w"
 	},
 	"bugs": {
-		"url": "https://github.com/joelhenrique2000/boilerplate-react-library/issues"
+		"url": "https://github.com/swiftforge/swf-theme/issues"
 	},
 	"types": "dist/index.d.ts",
 	"peerDependencies": {
@@ -25,7 +25,7 @@
 		"react": "^16.0.0",
 		"react-dom": "^16.0.0"
 	},
-	"homepage": "https://github.com/joelhenrique2000/boilerplate-react-library#readme",
+	"homepage": "https://github.com/swiftforge/swf-theme",
 	"dependencies": {
 		"ansi-colors": "^4.1.1",
 		"babel-jest": "^26.0.1",
