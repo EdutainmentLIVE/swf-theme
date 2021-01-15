@@ -34,7 +34,6 @@
 		"fs-jetpack": "^2.4.0",
 		"inquirer": "^7.1.0",
 		"lodash": "^4.17.20",
-		"lodash-es": "^4.17.20",
 		"ora": "^4.0.4",
 		"styled-components": "^5.2.1",
 		"styled-reset": "^4.3.4",
