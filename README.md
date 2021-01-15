@@ -505,9 +505,25 @@ TODO: add docs
 
 ### FluidFontSizes
 
-Function for generating font-sizes using css calculations. It returns css calculations based on options passed in (if no options passed in, will use values when creating the theme)
+Function for generating font-sizes using css calculations. It returns css calculations based on options passed in (if no options passed in, will use defaults)
 
 Example with styled-components:
+
+```jsx
+import styled from 'styled-components'
+
+const H1 = styled.h1`
+	${props =>
+		props.theme.fluidFontSize({
+			minSize: 22, // in pixels
+			maxSize: 45, // in pixels
+			minViewport: 320, // is fixed at minSize below this threshold (defaults to breaks.mobile)
+			maxViewport: 1480, // is fixed at maxSize above this threshold (defaults to breaks.ldesk)
+		})}
+`
+```
+
+fluidFontSizes is also exported from Swf-theme:
 
 ```jsx
 import styled from 'styled-components'
@@ -523,111 +539,7 @@ const H1 = styled.h1`
 `
 ```
 
-## Global styles
-
-swf-theme also provides a GlobalStyles styled-component. This is generated when creating the theme and should be placed at the top level of your app before any other global styles used in the app.
-
-### Usage
-
-```jsx
-import { GlobalStyles, createTheme } from '@swfsoft/swf-theme'
-
-createTheme()
-
-const App = () => {
-	;<>
-		<GlobalStyles />
-		//...rest of your app
-	</>
-}
-```
-
-### Global style classes
-
-In addition to performing a number of base styles and resets (uses [styled-reset](https://www.npmjs.com/package/styled-reset)), the global styles also enables a handful of useful classes that can be used anywhere in the app.
-
-#### .flex
-
-```jsx
-.flex {
-	display: flex;
-	flex-wrap: wrap;
-}
-```
-
-#### .flex-tablet
-
-same as .flex but only affects breaks.tablet and larger screens
-
-#### .flex-desk
-
-same as .flex but only affects breaks.sdesk and larger screens
-
-#### .overlay
-
-```jsx
-.overlay {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	z-index: 10;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	background-color: ${colors.bg('tint80')};
-}
-```
-
-#### .cta
-
-```jsx
-.cta {
-	display:flex;
-	align-items: center;
-	justify-content: center;
-	padding: 0.5em 1em;
-	text-transform: uppercase;
-	font-size: 1.1em;
-	.icon {
-		margin-right: 0.5em;
-	}
-	${media.tablet} {
-		padding: 1em 2em;
-	}
-	${media.sdesk} {
-		font-size: 1.2em;
-	}
-}
-```
-
-#### .rt and .rich-text
-
-These are some base styles for content that comes in from richtext sources.
-
-These do things like:
-
-- Add bullets and numbers to ul and ol
-- Add margins to block level typographical elements (p, h, etc.)
-- Constrain images to their parent containers
-
-#### h elements
-
-By default these elements will use css calculations to fluidly change their font size based on screen size.
-(These do have a fallback em size as well for browsers that don't support css calculations).
-
-The calculations can be adjusted by setting font options when creating the theme:
-
-```jsx
-createTheme({
-	fonts: {
-		hMin: 1.1, // minimum font size (will be fallback size for h6)
-		hMax: 4, // max font size (will be fallback size for h1)
-		hUnit: 'em', // unit for generating fallbacks
-	},
-})
-```
+---
 
 ## Typescript
 
