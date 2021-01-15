@@ -189,7 +189,7 @@ const App = ({ children }) => (
 
 The theme is automatically inserted as props in all styled components throughout the app:
 
-Fo more information about using styled-components take a look at their [documentation](https://styled-components.com/docs/)
+For more information about using styled-components take a look at their [documentation](https://styled-components.com/docs/)
 
 ```jsx
 import styled from 'styled-components'
@@ -231,7 +231,7 @@ Available operations:
 
 ### Preset operations
 
-You may notice that the percentage value for operations is from 7-100. That's because the values 0-6 are reserved for presets. These are useful for more consistent variations across the application.
+You may notice that the percentage value for operations is from 7-100. This is because values 0-6 are reserved for presets. These are useful for more consistent variations across the application.
 
 The presets are automatically generated off of the colorFallback settings and are based on a percentage offset below and above the fallback, where each number from 0-6 represent a value either above or below the fallback percentage.
 
@@ -248,11 +248,11 @@ For example the `light` operation presets look like this (assuming the fallback 
 
 NOTE: The same multipliers are used for `light`, `dark`, `sat`, and `desat` operations.
 
-`tint` operation does not use presets but if no value is passed in will use fallback value (default is `25`).
+`tint` operation does not use presets but if no value is passed in will use the fallback value (default is `25`).
 
 **example usege with styled-components:**
 
-Lightens primary color value by 25% (no value defaults to preset of `3`)
+Lightens primary color value by 25% (if no value is passed in, it defaults to the equivalent preset of `3`)
 
 ```jsx
 import styled from 'styled-componets'
@@ -262,7 +262,7 @@ const MyStyledDiv = styled.div`
 `
 ```
 
-Lightens by 15% (based on preset table above)
+Lightens by 15% (based on preset of `1`)
 
 ```jsx
 import styled from 'styled-componets'
@@ -285,6 +285,7 @@ const MyStyledDiv = styled.div`
 NOTE: values above `100` are treated as 100%.
 
 **Operations can also be chained:**
+
 Lightens by 22% and changes opacity to 60%
 
 ```jsx
@@ -299,7 +300,7 @@ const MyStyledDiv = styled.div`
 
 Since all operations return another SwfColor class instance you will need to use `.val` at the end to return the calculated color value.
 
-This includes the raw color (remember this is also SwfColor class instance):
+This includes the raw color (remember this is also a SwfColor class instance):
 
 ```jsx
 import styled from 'styled-componets'
@@ -314,37 +315,37 @@ const MyStyledDiv = styled.div`
 **Main defaults:**
 | | Default | Intended usage |
 |-----------|-----------|---------------------------------------------------------|
-| primary | #0569b1 | backgrounds, borders, etc |
-| secondary | #f7a707 | CTAs, links, emphasis, etc |
-| aux1 | #7990ad | accent color - less emphasis, sub-content for CTA, etc. |
-| aux2 | #79a6ad | Alternative accent color - rarely needed |
+| primary | ![#0569b1](https://via.placeholder.com/15/0569b1/000000?text=+) `#0569b1` | backgrounds, borders, etc |
+| secondary | ![#f7a707](https://via.placeholder.com/15/f7a707/000000?text=+) `#f7a707` | CTAs, links, emphasis, etc |
+| aux1 | ![#7990ad](https://via.placeholder.com/15/7990ad/000000?text=+) `#7990ad` | accent color - less emphasis, sub-content for CTA, etc. |
+| aux2 | ![#79a6ad](https://via.placeholder.com/15/79a6ad/000000?text=+) `#79a6ad` | Alternative accent color - rarely needed |
 
 **Utility defaults:**
 | | Default | Description |
 |----------|---------|--------------------------------------|
-| ok | #5bbb12 | green - success color |
-| err | #df1500 | red - error/alert color |
-| warn | #ff9900 | orange - warning/info color |
-| disabled | #c0c4c5 | grey - disabled interactive elements |
+| ok | ![#5bbb12](https://via.placeholder.com/15/5bbb12/000000?text=+) `#5bbb12` | green - success color |
+| err | ![#df1500](https://via.placeholder.com/15/df1500/000000?text=+) `#df1500` | red - error/alert color |
+| warn | ![#ff9900](https://via.placeholder.com/15/ff9900/000000?text=+) `#ff9900` | orange - warning/info color |
+| disabled | ![#c0c4c5](https://via.placeholder.com/15/c0c4c5/000000?text=+) `#c0c4c5` | grey - disabled interactive elements |
 
 ---
 
 **Monochromatic defaults**
 | | Default | Intended usage |
 |-------|---------|-----------------|
-| black | #000 | General purpose |
-| white | #FFF | General purpose |
-| grey | #868b8d | General purpose |
+| black | ![#000](https://via.placeholder.com/15/000/000000?text=+) `#000` | General purpose |
+| white | ![#FFF](https://via.placeholder.com/15/FFF/000000?text=+) `#FFF` | General purpose |
+| grey | ![#868b8d](https://via.placeholder.com/15/868b8d/000000?text=+) `#868b8d` | General purpose |
 
 **By Name Defaults**
 | | Default |
 |----------|---------|
-| blue | #0e8be4 |
-| brown | #866f3c |
-| purple | #7032d0 |
-| orange | #e88d00 |
-| slate | #3a3f42 |
-| midnight | #1c1e1f |
+| blue | ![#0e8be4](https://via.placeholder.com/15/0e8be4/000000?text=+) `#0e8be4` |
+| brown | ![#866f3c](https://via.placeholder.com/15/866f3c/000000?text=+) `#866f3c` |
+| purple | ![#7032d0](https://via.placeholder.com/15/7032d0/000000?text=+) `#7032d0` |
+| orange | ![#e88d00](https://via.placeholder.com/15/e88d00/000000?text=+) `#e88d00` |
+| slate | ![#3a3f42](https://via.placeholder.com/15/3a3f42/000000?text=+) `#3a3f42` |
+| midnight | ![#1c1e1f](https://via.placeholder.com/15/1c1e1f/000000?text=+) `#1c1e1f` |
 
 **Fallback defaults**
 
