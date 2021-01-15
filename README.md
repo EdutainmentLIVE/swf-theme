@@ -156,7 +156,7 @@ export const ThemeGlobalStyles = createGlobalStyle(themeGlobalStyles)
 **Global styles include options:**
 | | Description | Default |
 |---------------|----------------------------------------------------------------------------------------------|---------|
-| fluidHeadings | uses the fluidFontSizes function to generate fluid font sizes based on default heading sizes | false |
+| fluidHeadings | uses the fluidFontSizes function to generate fluid font sizes that can be use by applying a class of .fluid to h tags| false |
 | cssReset | includes [styled-reset](https://www.npmjs.com/package/styled-reset) | true |
 | milligram | includes [milligram css framework ](https://milligram.io/) | false |
 
@@ -507,6 +507,8 @@ TODO: add docs
 
 Function for generating font-sizes using css calculations. It returns css calculations based on options passed in (if no options passed in, will use defaults)
 
+These font sizes are responsive and will grow or shrink based on screen dimensions within the min/max restrictions set for the fonts and viewport.
+
 Example with styled-components:
 
 ```jsx
@@ -515,8 +517,8 @@ import styled from 'styled-components'
 const H1 = styled.h1`
 	${props =>
 		props.theme.fluidFontSize({
-			minSize: 22, // in pixels
-			maxSize: 45, // in pixels
+			minSize: 22, // in pixels (min size the font will ever be)
+			maxSize: 45, // in pixels (max size the font will ever be)
 			minViewport: 320, // is fixed at minSize below this threshold (defaults to breaks.mobile)
 			maxViewport: 1480, // is fixed at maxSize above this threshold (defaults to breaks.ldesk)
 		})}
@@ -530,12 +532,7 @@ import styled from 'styled-components'
 import { fluidFontSize } from '@swfsoft/swf-theme'
 
 const H1 = styled.h1`
-	${fluidFontSize({
-		minSize: 22, // in pixels
-		maxSize: 45, // in pixels
-		minViewport: 320, // is fixed at minSize below this threshold (defaults to breaks.mobile)
-		maxViewport: 1480, // is fixed at maxSize above this threshold (defaults to breaks.ldesk)
-	})}
+	${fluidFontSize()}
 `
 ```
 
