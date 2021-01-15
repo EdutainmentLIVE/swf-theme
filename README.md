@@ -75,12 +75,24 @@ const theme = createTheme({
 
 	breaks: {
 		// override breakpoints
-		// NOTE: these must be number values
-		tablet: 767,
-		sdesk: 1100, // small desktop
-		ldesk: 1480, // large desktop
+		tablet: {
+      num: 767
+    },
+    // small desktop
+		sdesk: {
+      num: 1100
+    }
+    // large desktop
+		ldesk: {
+      num: 1480
+    },
 		// NOTE: we encourage mobile first dev by using min-width media queries
-	},
+  },
+
+  // add your own data to be included in the theme
+  myData: 'useful data',
+
+  //... More defaults available - see below
 })
 
 export default theme
