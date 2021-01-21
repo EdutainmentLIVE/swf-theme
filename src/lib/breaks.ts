@@ -1,15 +1,15 @@
-import { NumPx } from '../types'
+import { NumVal } from '../types'
 
 export type BreakOptions = {
-	tablet?: NumPx
-	sdesk?: NumPx
-	ldesk?: NumPx
+	tablet?: NumVal
+	sdesk?: NumVal
+	ldesk?: NumVal
 	[x: string]: any
 }
 export type Breaks = {
-	tablet: NumPx
-	sdesk: NumPx
-	ldesk: NumPx
+	tablet: NumVal
+	sdesk: NumVal
+	ldesk: NumVal
 }
 export type Medias = {
 	mobile: string

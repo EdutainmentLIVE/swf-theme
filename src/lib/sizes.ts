@@ -1,9 +1,9 @@
-import { NumPx, NumVal } from '../types'
+import { NumVal } from '../types'
 import { generateHsizes, HsizeOptions, Hsizes } from './fonts'
 
 export type SizeOptions = {
 	font?: {
-		base?: NumPx
+		base?: NumVal
 		h?: Hsizes
 	} & HsizeOptions
 	gutter?: {
@@ -22,7 +22,7 @@ export type SizeOptions = {
 
 export type Sizes = {
 	font: {
-		base: NumPx
+		base: NumVal
 	} & Hsizes
 	gutter: {
 		mobile: NumVal
@@ -41,40 +41,40 @@ export const defaultSizes: Sizes = {
 	font: {
 		base: {
 			num: 15,
-			px: '15px',
+			val: '15px',
 		},
 		...generateHsizes(),
 	},
 	gutter: {
 		mobile: {
 			num: 1.1,
-			em: '1.1em',
+			val: '1.1em',
 		},
 		tablet: {
 			num: 0.5,
-			vw: '0.5vw',
+			val: '0.5vw',
 		},
 		sdesk: {
 			num: 4,
-			vw: '4vw',
+			val: '4vw',
 		},
 		ldesk: {
 			num: 6,
-			vw: '6vw',
+			val: '6vw',
 		},
 	},
 	header: {
 		mobile: {
 			num: 40,
-			px: '40px',
+			val: '40px',
 		},
 		tablet: {
 			num: 50,
-			px: '50px',
+			val: '50px',
 		},
 		sdesk: {
 			num: 80,
-			px: '80px',
+			val: '80px',
 		},
 	},
 }

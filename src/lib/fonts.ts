@@ -28,8 +28,8 @@ export const generateHsizes = (opts: GenerateHSizeOptions = {}): Hsizes => {
 			const res = acc
 			res[key] = {
 				num,
+				val: `${num}${unit}`,
 			}
-			res[key][unit] = `${num}${unit}`
 			return res
 		}, {})
 }

@@ -23,7 +23,7 @@ export const createThemeGlobalStyles = (
   }
   body {
     color: ${theme.colors.black.val};
-    font-size: ${theme.sizes.font.base};
+    font-size: ${theme.sizes.font.base.num}px;
     font-family: ${theme.fonts.textFamily};
   }
 
@@ -32,10 +32,13 @@ export const createThemeGlobalStyles = (
     font-weight: inherit;
     font-family: inherit;
   }
+  
+  div,ul,li,a,p,h1,h2,h3,h4,h5,h6,pre,blockquote,cite,header,footer,main,body,section {
+    position: relative;
+  }
 
   p,div,h1,h2,h3,h4,h5,h6,section,aside,header,footer,blockquote,ul,ol,nav {
     display: block;
-    position:relative;
     box-sizing: border-box;
   }
 
@@ -116,5 +119,46 @@ export const createThemeGlobalStyles = (
       list-style-type: decimal;
     }
   }
+
+  /* Column layout classes */
+  .cols {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+    &.cols-tablet {
+      display: block;
+      width: auto;
+      ${theme.media.tablet} {
+        display: flex;
+        width: 100%;
+      }
+    }
+    &.cols-sdesk {
+      display: block;
+      width: auto;
+      ${theme.media.sdesk} {
+        display: flex;
+        width: 100%;
+      }
+    }
+    & > *{
+      flex-grow: 1;
+    }
+  }
+
+  /* Flex utilities */
+  .flex {
+		display: flex;
+	}
+	.flex-tablet {
+		${theme.media.sdesk} {
+			display: flex;
+		}
+	}
+	.flex-desk {
+		${theme.media.sdesk} {
+			display: flex;
+		}
+	}
 `
 }
