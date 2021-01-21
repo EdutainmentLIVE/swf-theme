@@ -1,6 +1,6 @@
 {
 	"name": "@swfsoft/swf-theme",
-	"version": "2.0.3",
+	"version": "2.0.4",
 	"description": "Theming system for swf react.js projects",
 	"author": "swiftforge",
 	"license": "MIT",
