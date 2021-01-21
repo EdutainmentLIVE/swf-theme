@@ -22,8 +22,8 @@ export const createThemeGlobalStyles = (
     background-color: ${theme.colors.white.val};
   }
   body {
-    color: ${theme.colors.black.val};
-    font-size: ${theme.sizes.font.base.num}px;
+    color: ${theme.colors.text.val};
+    font-size: ${theme.sizes.font.base.val};
     font-family: ${theme.fonts.textFamily};
   }
 
@@ -33,7 +33,7 @@ export const createThemeGlobalStyles = (
     font-family: inherit;
   }
   
-  div,ul,li,a,p,h1,h2,h3,h4,h5,h6,pre,blockquote,cite,header,footer,main,body,section {
+  div,ul,li,a,p,h1,h2,h3,h4,h5,h6,pre,blockquote,cite,header,footer,main,body,section,aside {
     position: relative;
   }
 
@@ -44,6 +44,14 @@ export const createThemeGlobalStyles = (
 
   p {
     margin: 0.5em 0;
+  }
+  
+  a {
+    color: ${theme.colors.secondary.val};
+    text-decoration: none;
+    &:hover {
+      color: ${theme.colors.secondary.bright(0).val};
+    }
   }
 
   em, i {

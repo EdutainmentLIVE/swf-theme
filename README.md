@@ -76,15 +76,18 @@ const theme = createTheme({
 	breaks: {
 		// override breakpoints
 		tablet: {
-      num: 767
+      num: 767,
+      val: '767px'
     },
     // small desktop
 		sdesk: {
-      num: 1100
+      num: 1100,
+      val: '1100px'
     }
     // large desktop
 		ldesk: {
-      num: 1480
+      num: 1480,
+      val: '1480px'
     },
 		// NOTE: we encourage mobile first dev by using min-width media queries
   },
@@ -224,6 +227,7 @@ Available operations:
 |--------|------------------------------------------------------------|---------------|
 | light | Will lighten the color by a percentage value from 7-100 | 25 |
 | dark | Will darken the color by a percentage value from 7-100 | 20 |
+| bright | Will brighten the color by a percentage value from 7-100 | 25 |
 | sat | Will saturate the color by a percentage value from 7-100 | 40 |
 | desat | Will desaturate the color by a percentage value from 7-100 | 40 |
 | tint | Will change the opacity to a percentage value | 25 |
@@ -246,7 +250,7 @@ For example the `light` operation presets look like this (assuming the fallback 
 | 5 | 35% | 1.4 |
 | 6 | 40% | 1.6 |
 
-NOTE: The same multipliers are used for `light`, `dark`, `sat`, and `desat` operations.
+NOTE: The same multipliers are used for `light`, `dark`, `bright`, `sat`, and `desat` operations.
 
 `tint` operation does not use presets but if no value is passed in will use the fallback value (default is `25`).
 
@@ -327,6 +331,7 @@ const MyStyledDiv = styled.div`
 | err | ![#df1500](https://via.placeholder.com/15/df1500/000000?text=+) `#df1500` | red - error/alert color |
 | warn | ![#ff9900](https://via.placeholder.com/15/ff9900/000000?text=+) `#ff9900` | orange - warning/info color |
 | disabled | ![#c0c4c5](https://via.placeholder.com/15/c0c4c5/000000?text=+) `#c0c4c5` | grey - disabled interactive elements |
+| text | ![#3a3f42](https://via.placeholder.com/15/3a3f42/000000?text=+) `#3a3f42` | dark grey - base font color
 
 ---
 
@@ -369,17 +374,17 @@ Default breaks:
 {
   tablet: {
     num: 767
-    px: '767px'
+    val: '767px'
   },
   // small desktop
   sdesk: {
     num: 1112
-    px: '1112px'
+    val: '1112px'
   },
   // large desktop
   ldesk: {
     num: 1480
-    px: '1480px'
+    val: '1480px'
   },
 }
 ```
@@ -456,41 +461,41 @@ defaults:
   fonts: {
     // base font size (GlobalStyles automatically applies this to the body tag)
     base: {
-      px: "15px",
+      val: "15px",
       num: 15
     },
   },
   // global header
   header: {
     mobile: {
-      px: "40px",
+      val: "40px",
       num: 40
     },
     tablet: {
-      px: "50px",
+      val: "50px",
       num: 50
     },
     sdesk: {
-      px: "80px",
+      val: "80px",
       num: 80
     }
   }
   // page gutters (spacing from left and right sides of the view port)
   gutter: {
     mobile: {
-      em: "1.1em",
+      val: "1.1em",
       num: 1.1
     },
     tablet: {
-      vw: "0.5vw",
+      val: "0.5vw",
       num: 0.5
     },
     sdesk: {
-      vw: "4vw",
+      val: "4vw",
       num: 4
     },
     ldesk: {
-      vw: "6vw",
+      val: "6vw",
       num: 6
     }
   }

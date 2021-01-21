@@ -21,15 +21,15 @@ export type Medias = {
 export const defaultBreaks = {
 	tablet: {
 		num: 767,
-		px: '767px',
+		val: '767px',
 	},
 	sdesk: {
 		num: 1112,
-		px: '1112px',
+		val: '1112px',
 	},
 	ldesk: {
 		num: 1480,
-		px: '1480px',
+		val: '1480px',
 	},
 }
 
@@ -64,8 +64,8 @@ export const createMediaQueries = (options: BreakOptions = {}) => {
 
 	return {
 		mobile: createMediaQuery({ max: `${config.tablet.num - 1}px` }),
-		tablet: createMediaQuery({ min: config.tablet.px }),
-		sdesk: createMediaQuery({ min: config.sdesk.px }),
-		ldesk: createMediaQuery({ min: config.ldesk.px }),
+		tablet: createMediaQuery({ min: config.tablet.val }),
+		sdesk: createMediaQuery({ min: config.sdesk.val }),
+		ldesk: createMediaQuery({ min: config.ldesk.val }),
 	}
 }

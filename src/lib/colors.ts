@@ -18,6 +18,7 @@ export type ColorOptions = {
 	err?: string
 	warn?: string
 	disabled?: string
+	text?: string
 
 	grey?: string
 	black?: string
@@ -43,6 +44,7 @@ export type ColorValues = {
 	err: string
 	warn: string
 	disabled: string
+	text: string
 
 	grey: string
 	black: string
@@ -67,6 +69,7 @@ export type Colors = {
 	err: SwfColor
 	warn: SwfColor
 	disabled: SwfColor
+	text: SwfColor
 
 	grey: SwfColor
 	black: SwfColor
@@ -77,6 +80,7 @@ export type Colors = {
 export type FallbackOptions = {
 	tint?: number
 	lighten?: number
+	brighten?: number
 	darken?: number
 	saturate?: number
 	desaturate?: number
@@ -85,6 +89,7 @@ export type FallbackOptions = {
 export type Fallbacks = {
 	tint: number
 	lighten: number
+	brighten: number
 	darken: number
 	saturate: number
 	desaturate: number
@@ -93,6 +98,7 @@ export type Fallbacks = {
 export const defaultFallbacks = {
 	tint: 25,
 	lighten: 25,
+	brighten: 25,
 	darken: 20,
 	saturate: 40,
 	desaturate: 40,
@@ -115,6 +121,7 @@ export const defaultColors = {
 	err: '#df1500',
 	warn: '#ff9900',
 	disabled: '#c0c4c5',
+	text: '#3a3f42',
 
 	grey: '#868b8d',
 	black: '#000',

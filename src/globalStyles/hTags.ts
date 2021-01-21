@@ -2,7 +2,7 @@ import { Theme } from '../lib/theme'
 
 export const fluidHeadingSizes = (theme: Theme): string => `
   h1 {
-    font-size: ${theme.sizes.font.h1.em};
+    font-size: ${theme.sizes.font.h1.val};
     &.fluid {
       ${theme.fonts.fluidFontSize({
 				maxSize: theme.sizes.font.base.num * theme.sizes.font.h1.num + theme.sizes.font.base.num,
@@ -16,7 +16,7 @@ export const fluidHeadingSizes = (theme: Theme): string => `
     }
   }
   h2 {
-    font-size: ${theme.sizes.font.h2.em};
+    font-size: ${theme.sizes.font.h2.val};
     &.fluid {
       ${theme.fonts.fluidFontSize({
 				maxSize: theme.sizes.font.base.num * theme.sizes.font.h2.num + theme.sizes.font.base.num,
@@ -30,7 +30,7 @@ export const fluidHeadingSizes = (theme: Theme): string => `
     }
   }
   h3 {
-    font-size: ${theme.sizes.font.h3.em};
+    font-size: ${theme.sizes.font.h3.val};
     &.fluid {
       ${theme.fonts.fluidFontSize({
 				maxSize: theme.sizes.font.base.num * theme.sizes.font.h3.num + theme.sizes.font.base.num,
@@ -44,7 +44,7 @@ export const fluidHeadingSizes = (theme: Theme): string => `
     }
   }
   h4 {
-    font-size: ${theme.sizes.font.h4.em};
+    font-size: ${theme.sizes.font.h4.val};
     &.fluid {
       ${theme.fonts.fluidFontSize({
 				maxSize: theme.sizes.font.base.num * theme.sizes.font.h4.num + theme.sizes.font.base.num,
@@ -58,7 +58,7 @@ export const fluidHeadingSizes = (theme: Theme): string => `
     }
   }
   h5 {
-    font-size: ${theme.sizes.font.h5.em};
+    font-size: ${theme.sizes.font.h5.val};
     &.fluid {
       ${theme.fonts.fluidFontSize({
 				maxSize: theme.sizes.font.base.num * theme.sizes.font.h5.num + theme.sizes.font.base.num,
@@ -72,7 +72,7 @@ export const fluidHeadingSizes = (theme: Theme): string => `
     }
   }
   h6 {
-    font-size: ${theme.sizes.font.h6.em};
+    font-size: ${theme.sizes.font.h6.val};
     &.fluid {
       ${theme.fonts.fluidFontSize({
 				maxSize: theme.sizes.font.base.num * theme.sizes.font.h6.num + theme.sizes.font.base.num,
