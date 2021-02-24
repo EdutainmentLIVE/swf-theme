@@ -37,7 +37,7 @@ export const createThemeGlobalStyles = (
     position: relative;
   }
 
-  p,div,h1,h2,h3,h4,h5,h6,section,aside,header,footer,blockquote,ul,ol,nav {
+  p,div,h1,h2,h3,h4,h5,h6,section,aside,header,footer,blockquote,ul,ol,nav,legend,label,li {
     display: block;
     box-sizing: border-box;
   }
