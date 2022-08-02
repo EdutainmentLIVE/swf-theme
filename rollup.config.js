@@ -55,7 +55,6 @@ export default [
 		external: [
 			'react',
 			'react-dom',
-			'prop-types',
 			...Object.keys(pkg.dependencies || {}),
 			...Object.keys(pkg.peerDependencies || {}),
 		],
